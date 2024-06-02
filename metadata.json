@@ -1,0 +1,5 @@
+{
+  "name": "TildaDrop",
+  "path": "apps.tildadrop.app",
+  "callable": "TildaDropApp"
+}
