@@ -13,6 +13,7 @@ class TildaDropApp(app.App):
     comms: Comms
     color: int = 0
     textColor: int = 1
+    hasSent: bool = False
 
     def __init__(self):
         self.button_states = Buttons(self)
@@ -22,13 +23,19 @@ class TildaDropApp(app.App):
 
     def update(self, delta):
         if self.button_states.get(BUTTON_TYPES["UP"]):
-            self.text = "Sending…"
-            self.text2 = ""
-            send_task = self.comms.send(
-                mac=PEER_MAC,
-                message="Hi",
-            )
-            asyncio.create_task(send_task)
+            if not self.hasSent:
+                self.text = "Sending…"
+                self.text2 = ""
+                send_task = self.comms.send(
+                    message="Hi",
+                    mac=PEER_MAC,
+                )
+                asyncio.create_task(send_task)
+                self.hasSent = True
+            else:
+                # self.text = "Already sent"
+                # self.text2 = ""
+                print("Already sent")
         elif self.button_states.get(BUTTON_TYPES["DOWN"]):
             self.text = "Receiving…"
             self.text2 = ""
@@ -74,12 +81,12 @@ class TildaDropApp(app.App):
 
         # ctx.restore()
 
-    async def on_receive(self, host: bytes, msg: str):
+    def on_receive(self, host: bytes, msg: str):
         # print(f"Received message")
+        self.textColor = 0
         self.text = "Received!"
         self.text2 = msg
         self.color = 1
-        self.textColor = 0
         # self.text2 =
 
 
