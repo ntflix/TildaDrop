@@ -6,7 +6,7 @@ The MAC address of the target badge is needed on the 'sender' badge. Set this in
 
 You can find a board's MAC through pressing the `right` button of the Tildagon in this app.
 
-Broadcast functionality, which does not require the MAC address of a recipient, does not seem to work according to the [espnow docs](https://docs.micropython.org/en/latest/library/espnow.html#broadcast-and-multicast).
+Broadcast functionality, which does not require the MAC address of a recipient, does not seem to work as it shows in the [espnow docs](https://docs.micropython.org/en/latest/library/espnow.html#broadcast-and-multicast).
 
 > Two badges are needed for this to work - a badge to send, a badge to receive.
 
